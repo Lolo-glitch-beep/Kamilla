@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <title>Sois ma Valentine 💖</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      text-align: center;
+      background: #ffe6f0;
+      margin: 0;
+      padding-top: 60px;
+      overflow: hidden;
+    }
+
+    h1 {
+      color: #ff2e88;
+      margin-top: 10px;
+    }
+
+    button {
+      padding: 15px 25px;
+      font-size: 20px;
+      border: none;
+      border-radius: 12px;
+      cursor: pointer;
+      margin: 10px;
+      position: relative;
+    }
+
+    .yes-button {
+      background-color: #ff2e88;
+      color: white;
+    }
+
+    .no-button {
+      background-color: #ccc;
+      position: absolute;
+    }
+
+    .love-page {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(#ff9ecb, #ff2e88);
+      color: white;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      text-align: center;
+      font-size: 22px;
+      opacity: 0;
+      transition: opacity 0.5s;
+      z-index: 1000;
+      overflow: hidden;
+    }
+
+    .love-page.show {
+      opacity: 1;
+    }
+
+    .love-page h1 {
+      font-size: 40px;
+      margin-bottom: 15px;
+    }
+
+    .heart {
+      position: fixed;
+      top: -10px;
+      font-size: 24px;
+      animation: fall linear forwards;
+    }
+
+    @keyframes fall {
+      to {
+        transform: translateY(110vh);
+        opacity: 0;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <h1>Veux-tu être ma Valentine ? 💖</h1>
+
+  <button class="yes-button" onclick="handleYesClick()">Oui</button>
+  <button class="no-button" id="noButton">Non</button>
+
+  <div class="love-page" id="lovePage">
+    <h1>Yaaay 💕</h1>
+    <p>
+      Tu es officiellement ma Valentine 🥰<br>
+      Tu ne regretteras pas ton choix mon ange ❤️
+    </p>
+  </div>
+
+  <script>
+    const noButton = document.getElementById("noButton");
+
+    // position initiale du bouton Non
+    noButton.style.left = "55%";
+    noButton.style.top = "300px";
+
+    noButton.addEventListener("mouseover", () => {
+      const maxX = window.innerWidth - noButton.offsetWidth;
+      const maxY = window.innerHeight - noButton.offsetHeight;
+
+      const randomX = Math.random() * maxX;
+      const randomY = Math.random() * maxY;
+
+      noButton.style.left = randomX + "px";
+      noButton.style.top = randomY + "px";
+    });
+
+    function handleYesClick() {
+      const lovePage = document.getElementById("lovePage");
+      lovePage.classList.add("show");
+
+      setInterval(() => {
+        const heart = document.createElement("div");
+        heart.className = "heart";
+        heart.textContent = "💖";
+        heart.style.left = Math.random() * 100 + "vw";
+        heart.style.animationDuration = (2 + Math.random() * 3) + "s";
+        document.body.appendChild(heart);
+
+        setTimeout(() => heart.remove(), 5000);
+      }, 300);
+    }
+  </script>
+
+</body>
+</html>
